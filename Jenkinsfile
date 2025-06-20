@@ -39,7 +39,6 @@ pipeline {
                         remote.user = user
                         remote.identityFile = keyfile
                         sshCommand remote: remote, command: "source ~/venv-boto3/bin/activate"
-                        sshCommand remote: remote, command: "pip3 install boto3"
                         sshCommand remote: remote, command: "pip list"
                     }
                 }
