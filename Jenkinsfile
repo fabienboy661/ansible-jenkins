@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     echo "copying all necessary files to ansible control node"
-                    sshanget(['ansible-cred']){
+                    sshagent(['ansible-cred']){
                         sh "scp -P ${SSH_PORT} -o StrictHostKeyChecking=no ansible/* ${SSH_TARGET}:${SSH_DEST_PATH}"
 
                         withCredentials([sshUserPrivateKey(credentialsId: 'ec2-server-key', keyFileVariable: 'keyfile', usernamaVariabel: 'user')]) {
