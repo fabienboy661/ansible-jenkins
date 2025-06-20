@@ -1,0 +1,38 @@
+---
+- name: install docker
+  hosts: aws_ec2
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Install docker
+      yum: 
+        name: docker
+        update_cache: yes
+        state: present
+    - name: adding user to docker group
+      user:
+        name: ec2-user
+        groups: docker
+        append: yes
+    - name: Reconnecte to server session
+      meta: reset_connection
+
+- name: Install docker compose v2
+  hosts: aws_ec2
+  become: yes
+  tasks:
+    - name: Create directory for Docker CLI plugin
+      file: 
+        path: /usr/local/lib/docker/cli-plugins
+        state: directory
+        mode: '0755'
+    - name: Download docker Compose v2 binary
+      get_url: 
+        url: https://github.com/docker/compose/releases/download/v2.36.2/docker-compose-linux-x86_64
+        dest: /usr/local/lib/docker/cli-plugins/docker-compose
+        mode: a+x
+    - name: check version docker compose
+      shell: docker compose version
+      register: docker_version
+      changed_when: false
+    - debug: msg={{docker_version.stdout_lines}}
