@@ -13,7 +13,9 @@ pipeline {
                     sshagent(['ansible-cred']){
                         sh "scp -P ${SSH_PORT} -o StrictHostKeyChecking=no -r ansible/* ${SSH_TARGET}:${SSH_DEST_PATH}"
                         withCredentials([sshUserPrivateKey(credentialsId: 'ec2-server-key', keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
-                            sh "scp ${keyfile} ${SSH_TARGET}:${SSH_DEST_PATH}/ssh-key.pem"
+                            sh '''
+                                scp -P ${SSH_PORT} -o StrictHostKeyChecking=no ${keyfile} ${SSH_TARGET}:${SSH_DEST_PATH}/ssh-key.pem
+                            '''
                         }
                     }
                 }
