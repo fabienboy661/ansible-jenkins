@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        SSH_PORT = '34879'
-        SSH_TARGET = 'mokolos1@92.113.25.202'
-        SSH_DEST_PATH = '/home/mokolos1'
+        SSH_PORT       = credentials('ssh-port')  
+        SSH_TARGET     = credentials('ssh-target') 
+        SSH_DEST_PATH  = credentials('ssh-dest-path') 
     }
     stages {
         stage("copy files to ansible server") {
