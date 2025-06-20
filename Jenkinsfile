@@ -38,10 +38,11 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: 'ansible-cred', keyFileVariable: 'keyfile', usernameVariable: 'user')]) {
                         remote.user = user
                         remote.identityFile = keyfile
-                        sshCommand remote: remote, command: "python3 -m venv venv"
-                        sshCommand remote: remote, command: "pwd"
-                        sshCommand remote: remote, command: "source venv/bin/activate"
-                        sshCommand remote: remote, command: "pip list"
+                        // sshCommand remote: remote, command: "bash -c 'source venv/bin/activate && pip list'"
+                        sshCommand remote: remote, command: "./venv/bin/pip install boto3 botocore"
+                        sshCommand remote: remote, command: "./venv/bin/ansible-playbook my-playbook.yaml"
+                        // sshCommand remote: remote, command: "source venv/bin/activate"
+                        // sshCommand remote: remote, command: "pip list"
                     }
                 }
             }
