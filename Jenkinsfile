@@ -42,7 +42,7 @@ pipeline {
                             python3 -m venv ~/venv &&
                             source ~/venv/bin/activate &&
                             pip install --upgrade pip &&
-                            pip install boto3 botocore &&
+                            pip install ansible boto3 botocore &&
                             source ~/venv/bin/activate &&
                             ansible-playbook my-playbook.yaml
                         '''
