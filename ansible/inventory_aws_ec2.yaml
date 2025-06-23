@@ -5,6 +5,8 @@ regions:
 # filters:
 #   tag:Name: prod* 
 #   instance-state-name: running
+hostnames:
+  - tag:Name 
 keyed_groups:
   - key: tags
     prefix: tag
