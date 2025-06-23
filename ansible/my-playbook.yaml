@@ -1,6 +1,6 @@
 ---
 - name: install python
-  hosts: aws_ec2
+  hosts: all
   gather_facts: true
   become: yes
   tasks:
@@ -8,7 +8,7 @@
       raw: yum install -y python3
 
 - name: install docker
-  hosts: aws_ec2
+  hosts: all
   gather_facts: false
   become: yes
   tasks:
@@ -26,7 +26,7 @@
       meta: reset_connection
 
 - name: Install docker compose v2
-  hosts: aws_ec2
+  hosts: all
   become: yes
   tasks:
     - name: Create directory for Docker CLI plugin

@@ -4,7 +4,7 @@ regions:
   - eu-west-3
 filters:
   tag:Name: web-server
-  # instance-state-name: running
+  instance-state-name: running
 keyed_groups:
   - key: tags.Name
 hostnames:
