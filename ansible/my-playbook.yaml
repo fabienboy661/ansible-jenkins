@@ -1,4 +1,14 @@
 ---
+- name: install python
+  hosts: aws_ec2
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: install python
+      yum:
+        name: python3
+        state: present
+        
 - name: install docker
   hosts: aws_ec2
   gather_facts: false
