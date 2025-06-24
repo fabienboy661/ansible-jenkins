@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        SSH_PORT       = credentials('ssh-port')
+        SSH_PORT       = credentials('ssh-port') 
         SSH_TARGET     = credentials('ssh-target')
         SSH_DEST_PATH  = credentials('ssh-dest-path')
         HOST  = credentials('host')
